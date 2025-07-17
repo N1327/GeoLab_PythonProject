@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="my-4 text-center">{{ sport.upper() }} News</h2>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in posts %}
+      <div class="col">
+        <div class="card bg-secondary text-white h-100">
+          <img src="{{ post.image or 'https://via.placeholder.com/400x200' }}" class="card-img-top" alt="{{ post.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content }}</p>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="col">
+        <p>No posts found for {{ sport }}.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

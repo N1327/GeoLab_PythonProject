@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add Post to {{ sport.upper() }}</h2>
+<form method="POST">
+  <div class="mb-3">
+    <label>Title</label>
+    <input type="text" name="title" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label>Image URL</label>
+    <input type="text" name="image" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label>Content</label>
+    <textarea name="content" class="form-control" rows="4" required></textarea>
+  </div>
+  <button class="btn btn-outline-light">Add Post</button>
+</form>
+{% endblock %}

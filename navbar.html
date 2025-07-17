@@ -1,0 +1,30 @@
+<nav class="navbar navbar-dark bg-dark py-2">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div></div>
+        <span class="navbar-brand mx-auto fs-3">SPORTSCOPE</span>
+        <div class="d-flex">
+            {% if session.get('user') %}
+                <a href="/logout" class="btn btn-outline-light me-2">Logout ({{ session['user'] }})</a>
+                {% if session.get('admin') %}
+                    <a href="/admin" class="btn btn-outline-warning">Admin</a>
+                {% endif %}
+            {% else %}
+                <a href="/login" class="btn btn-outline-light me-2">Login</a>
+                <a href="/register" class="btn btn-outline-light">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <div class="container justify-content-center">
+        <div class="collapse navbar-collapse justify-content-center" id="sportsNavbar">
+            <ul class="navbar-nav d-flex flex-wrap justify-content-center">
+                <li class="nav-item"><a class="nav-link text-white fw-semibold px-4" href="/">Home</a></li>
+                {% for sport in ['football', 'basketball', 'tennis', 'chess', 'f1', 'ufc'] %}
+                    <li class="nav-item"><a class="nav-link text-white fw-semibold text-uppercase px-4" href="/{{ sport }}">{{ sport }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>

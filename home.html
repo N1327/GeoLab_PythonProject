@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="mainCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    {% set is_active = true %}
+    {% for sport, sport_posts in posts.items() %}
+        {% if sport_posts %}
+        <div class="carousel-item {% if is_active %}active{% endif %}">
+            <img src="{{ sport_posts[0].image or 'https://via.placeholder.com/1200x400?text=' + sport|upper }}" class="d-block w-100" alt="{{ sport }}">
+            <div class="carousel-caption d-md-block bg-dark bg-opacity-75 p-3 rounded-3 text-start">
+                <h5>{{ sport_posts[0].title }}</h5>
+                <p class="d-none d-sm-block">{{ sport_posts[0].content[:120] }}...</p>
+                <a href="/{{ sport }}" class="btn btn-light btn-sm">Go to {{ sport|capitalize }}</a>
+            </div>
+        </div>
+        {% set is_active = false %}
+        {% endif %}
+    {% endfor %}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+
+
+
+
+<h2 class="mb-4">Latest in Sports</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for sport, sport_posts in posts.items() %}
+        {% if sport_posts %}
+        <div class="col">
+            <div class="card h-100 border-primary">
+                <img src="{{ sport_posts[0].image or 'https://via.placeholder.com/400x200' }}" class="card-img-top" alt="{{ sport }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sport_posts[0].title }}</h5>
+                    <p class="card-text">{{ sport_posts[0].content[:100] }}...</p>
+                    <a href="/{{ sport }}" class="btn btn-outline-primary btn-sm">Go to {{ sport|capitalize }}</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}
